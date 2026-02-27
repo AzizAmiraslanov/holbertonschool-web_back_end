@@ -1,0 +1,1 @@
+﻿Python variable anotation tasks
