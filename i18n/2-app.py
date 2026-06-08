@@ -20,17 +20,17 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-# ✅ NEW WAY (NO DECORATOR)
 def get_locale():
+    """Determine best match for supported languages using request headers"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-# Flask-Babel 3+ way:
 babel.init_app(app, locale_selector=get_locale)
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index() -> str:
+    """Render the home page"""
     return render_template('2-index.html')
 
 
