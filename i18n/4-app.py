@@ -5,7 +5,7 @@ from flask_babel import Babel
 from os import getenv
 
 app = Flask(__name__)
-babel = Babel(app)
+babel = Babel()
 
 
 class Config(object):
@@ -28,16 +28,16 @@ def index() -> str:
     return render_template('4-index.html')
 
 
-@babel.localeselector
 def get_locale() -> str:
     """ Determines best match for supported languages """
     # check if there is a locale parameter/query string
-    if request.args.get('locale'):
-        locale = request.args.get('locale')
-        if locale in app.config['LANGUAGES']:
-            return locale
-    else:
-        return request.accept_languages.best_match(app.config['LANGUAGES'])
+    locale = request.args.get('locale')
+    if locale and locale in app.config['LANGUAGES']:
+        return locale
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+babel.init_app(app, locale_selector=get_locale)
 
 
 if __name__ == "__main__":
