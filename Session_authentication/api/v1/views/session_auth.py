@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Session authentication views."""
 
-from api.v1.views import app_views
+import os
+
 from flask import abort, jsonify, request
 from models.user import User
-import os
+from api.v1.views import app_views
 
 
 @app_views.route(
@@ -33,7 +34,11 @@ def login():
             from api.v1.app import auth
 
             session_id = auth.create_session(user.id)
-            session_name = os.getenv("HBNB_YELP_SESSION_NAME")
+
+            session_name = os.getenv(
+                "HBNB_YELP_SESSION_NAME",
+                "_my_session_id"
+            )
 
             response = jsonify(user.to_json())
             response.set_cookie(session_name, session_id)
