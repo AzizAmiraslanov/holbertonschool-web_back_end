@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-''' Module of Basic_auth
-'''
+''' Module of Basic_auth'''
 import base64
 from api.v1.auth.auth import Auth
 from typing import TypeVar
