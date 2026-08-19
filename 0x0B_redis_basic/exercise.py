@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Module for caching data using Redis."""
 
 from typing import Callable, Optional, Union
 from uuid import uuid4
