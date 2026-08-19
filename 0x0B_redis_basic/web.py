@@ -30,3 +30,4 @@ def get_page(url: str) -> str:
     """ Obtain the HTML content of a  URL """
     req = requests.get(url)
     return req.text
+    
